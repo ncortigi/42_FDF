@@ -6,7 +6,7 @@
 /*   By: ncortigi <ncortigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 11:09:00 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/01/18 15:56:53 by ncortigi         ###   ########.fr       */
+/*   Updated: 2023/02/03 17:08:06 by ncortigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	create(t_fdf *data)
 int	main(int ac, char **av)
 {
 	t_fdf	*data;
+	int		i;
+	int		j;
 
 	if (ac != 2 || open(av[1], O_RDWR) == -1)
 	{
@@ -37,9 +39,34 @@ int	main(int ac, char **av)
 	data = (t_fdf *)malloc(sizeof(t_fdf));
 	data->img = (t_img *)malloc(sizeof(t_img));
 	read_map(av[1], data);
+	i = 0;
+	while (i < data->height)
+	{
+		j = 0;
+		while (j < data->width)
+		{
+			ft_printf("%d ", data->color_matrix[i][j]);
+			j++;
+		}
+		i++;
+		ft_printf("\n");
+	}
+	ft_printf("\n");
+	ft_printf("\n");
+	i = 0;
+	while (i < data->height)
+	{
+		j = 0;
+		while (j < data->width)
+		{
+			ft_printf("%d ", data->z_matrix[i][j]);
+			j++;
+		}
+		i++;
+		ft_printf("\n");
+	}
 	create(data);
 	image(data);
-	//draw(data);
 	mlx_hook(data->win_ptr, 17, 0, ft_close, data);
 	mlx_key_hook(data->win_ptr, deal_keys, data);
 	mlx_loop(data->mlx_ptr);

@@ -6,7 +6,7 @@
 /*   By: ncortigi <ncortigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 16:38:59 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/01/18 12:11:05 by ncortigi         ###   ########.fr       */
+/*   Updated: 2023/02/06 12:37:25 by ncortigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@
 # define DIM_TYPE 65421
 # define ESC 65307
 
-typedef struct	s_img 
+typedef struct s_img
 {
 	void	*mlx_img;
 	char	*data;
-	int		bits_per_pixel;
-	int		line_length;
+	int		bits_pixel;
+	int		line_len;
 	int		endian;
 }		t_img;
 
@@ -58,6 +58,7 @@ typedef struct s_fdf
 	int		**z_matrix;
 	int		zoom;
 	int		color;
+	int	**color_matrix;
 	int		shift_x;
 	int		shift_y;
 	int		dim;
@@ -72,6 +73,9 @@ typedef struct s_fdf
 	t_img	*img;
 }		t_fdf;
 
+int		check_color(char *str);
+void	create_color_matrix(t_fdf *data);
+void	choose_color(int x, int y, t_fdf *data);
 void	read_map(char *file_name, t_fdf *data);
 void	set_to_draw(float x, float y, t_fdf *data);
 void	draw(t_fdf *data);

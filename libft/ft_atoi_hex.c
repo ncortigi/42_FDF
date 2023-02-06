@@ -1,36 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_close.c                                         :+:      :+:    :+:   */
+/*   ft_atoi_hex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncortigi <ncortigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/05 11:10:40 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/02/03 16:41:58 by ncortigi         ###   ########.fr       */
+/*   Created: 2022/08/01 14:13:57 by ncortigi          #+#    #+#             */
+/*   Updated: 2023/02/03 16:52:54 by ncortigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-int	ft_close(t_fdf *data)
+int	ft_hex(char c)
 {
-	int	i;
+	char	*BASE;
+	char	*base;
+	int		i;
 
 	i = 0;
-	mlx_destroy_image(data->mlx_ptr, data->img->mlx_img);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_display(data->mlx_ptr);
-	while (i <= data->height)
+	BASE = "0123456789ABCDEF";
+	base = "0123456789abcdef";
+	while (base[i])
 	{
-		free(data->z_matrix[i]);
-		free(data->color_matrix[i]);
+		if (c == '0')
+			return (0);
+		if (base[i] == c)
+			return (i);
+		else if (BASE[i] == c)
+			return (i);
 		i++;
 	}
-	free(data->z_matrix);
-	free(data->color_matrix);
-	free(data->img);
-	free(data->mlx_ptr);
-	free(data);
-	exit(0);
 	return (0);
+}
+
+int	ft_atoi_hex(char *str)
+{
+	int				i;
+	unsigned int	result;
+
+	i = 2;
+	result = 0;
+	while (str[i])
+	{
+		result = result * 16 + ft_hex(str[i]);
+		i++;
+	}
+	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: ncortigi <ncortigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 11:07:38 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/01/05 15:03:29 by ncortigi         ###   ########.fr       */
+/*   Updated: 2023/02/03 17:00:22 by ncortigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,33 @@ int	get_width(char *file_name)
 	return (width);
 }
 
-void	matrix(int *z_line, char *line)
+void	matrix(int *z_line, char *line, t_fdf *data, int n_line)
 {
 	char	**nums;
+	char	**col;
 	int		i;
 
 	nums = ft_split(line, ' ');
 	i = 0;
 	while (nums[i])
 	{
-		z_line[i] = ft_atoi(nums[i]);
-		free(nums[i]);
+		if (check_color(nums[i]))
+		{
+			col = ft_split(nums[i], ',');
+			free(nums[i]);
+			//ft_printf("\nnumero: %s\n", col[0]);
+			z_line[i] = ft_atoi(col[0]);
+			free(col[0]);
+			ft_printf("\ncolore: %s\n", col[1]);
+			data->color_matrix[n_line][i] = ft_atoi_hex(col[1]);
+			free(col[1]);
+		}
+		else
+		{
+			z_line[i] = ft_atoi(nums[i]);
+			free(nums[i]);
+			data->color_matrix[n_line][i] = 0;
+		}
 		i++;
 	}
 	free(nums);
@@ -99,6 +115,7 @@ void	read_map(char *file_name, t_fdf *data)
 
 	data->height = get_height(file_name);
 	data->width = get_width(file_name);
+	create_color_matrix(data);
 	data->z_matrix = ft_calloc(sizeof(int *), (data->height + 1));
 	i = 0;
 	while (i <= data->height)
@@ -113,7 +130,9 @@ void	read_map(char *file_name, t_fdf *data)
 			free(line);
 			break ;
 		}
-		matrix(data->z_matrix[i++], line);
+		//ft_printf("\nm%d\n", i);
+		matrix(data->z_matrix[i], line, data, i);
+		i++;
 		free(line);
 	}
 	close(fd);

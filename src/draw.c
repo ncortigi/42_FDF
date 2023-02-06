@@ -6,7 +6,7 @@
 /*   By: ncortigi <ncortigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 10:57:50 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/01/18 16:25:20 by ncortigi         ###   ########.fr       */
+/*   Updated: 2023/02/06 12:38:23 by ncortigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,6 @@ float	choice(float a, float b)
 	return (step);
 }
 
-void	choose_color(t_fdf *data)
-{
-	if (data->z1 || data->z2)
-		data->color = 0xfc0345;
-	else
-		data->color = 0x66FF33; //bianco0xBBFAFF;
-}
-
 void	bresenham(float x, float y, t_fdf *data)
 {
 	float	step;
@@ -39,7 +31,7 @@ void	bresenham(float x, float y, t_fdf *data)
 	int		color;
 
 	set_to_draw(x, y, data);
-	choose_color(data);
+	//choose_color(x, y, data);
 	color = data->color;
 	dx = data->x2 - data->x1;
 	dy = data->y2 - data->y1;
@@ -48,13 +40,13 @@ void	bresenham(float x, float y, t_fdf *data)
 	dy = dy / step;
 	while ((int)(data->x1 - data->x2) || (int)(data->y1 - data->y2))
 	{
+		if (data->x1 >= LARG_FIN || data->y1 >= ALT_FIN)
+			break ;
+		if (data->x1 < 0 || data->y1 < 0)
+			break ;
 		my_mlx_pixel_put(data, data->x1, data->y1, color);
 		data->x1 = data->x1 + dx;
 		data->y1 = data->y1 + dy;
-		if (data->x1 < 0 || data->y1 < 0)
-			break ;
-		if (data->x1 > LARG_FIN || data->y1 > ALT_FIN)
-			break ;
 	}
 }
 
@@ -71,12 +63,14 @@ void	draw(t_fdf *data)
 		{
 			if (x < data->width - 1)
 			{
+				choose_color(x, y, data);
 				data->x2 = x + 1;
 				data->y2 = y;
 				bresenham(x, y, data);
 			}
 			if (y < data->height - 1)
 			{
+				choose_color(x, y, data);
 				data->x2 = x;
 				data->y2 = y + 1;
 				bresenham(x, y, data);

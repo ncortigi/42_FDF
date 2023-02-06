@@ -6,7 +6,7 @@
 /*   By: ncortigi <ncortigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 11:05:36 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/01/12 12:26:11 by ncortigi         ###   ########.fr       */
+/*   Updated: 2023/01/19 14:04:26 by ncortigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int	deal_keys(int key, t_fdf *data)
 	if (check_keys(key))
 	{
 		mlx_clear_window(data->mlx_ptr, data->win_ptr);
+		mlx_destroy_image(data->mlx_ptr, data->img->mlx_img);
 		keys(key, data);
-		//draw(data);
 		image(data);
 	}
 	if (key == ESC)
