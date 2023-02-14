@@ -6,7 +6,7 @@
 /*   By: ncortigi <ncortigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 11:07:38 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/02/03 17:00:22 by ncortigi         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:11:55 by ncortigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,8 @@ void	matrix(int *z_line, char *line, t_fdf *data, int n_line)
 		{
 			col = ft_split(nums[i], ',');
 			free(nums[i]);
-			//ft_printf("\nnumero: %s\n", col[0]);
 			z_line[i] = ft_atoi(col[0]);
-			free(col[0]);
-			ft_printf("\ncolore: %s\n", col[1]);
-			data->color_matrix[n_line][i] = ft_atoi_hex(col[1]);
-			free(col[1]);
+			fill_color_matrix(n_line, i, col, data);
 		}
 		else
 		{
@@ -126,14 +122,11 @@ void	read_map(char *file_name, t_fdf *data)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
-		{
-			free(line);
 			break ;
-		}
-		//ft_printf("\nm%d\n", i);
 		matrix(data->z_matrix[i], line, data, i);
 		i++;
 		free(line);
 	}
+	free(line);
 	close(fd);
 }

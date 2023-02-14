@@ -6,14 +6,14 @@
 /*   By: ncortigi <ncortigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 16:38:59 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/02/06 12:37:25 by ncortigi         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:12:22 by ncortigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "../libft/libft.h"
+# include "../libftt/libft.h"
 # include "../libftprintf/ft_printf.h"
 # include "../minilibx-linux/mlx.h"
 # include <math.h>
@@ -58,7 +58,7 @@ typedef struct s_fdf
 	int		**z_matrix;
 	int		zoom;
 	int		color;
-	int	**color_matrix;
+	int		**color_matrix;
 	int		shift_x;
 	int		shift_y;
 	int		dim;
@@ -73,6 +73,7 @@ typedef struct s_fdf
 	t_img	*img;
 }		t_fdf;
 
+void	fill_color_matrix(int n_line, int i, char **col, t_fdf *data);
 int		check_color(char *str);
 void	create_color_matrix(t_fdf *data);
 void	choose_color(int x, int y, t_fdf *data);

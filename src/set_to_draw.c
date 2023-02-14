@@ -6,7 +6,7 @@
 /*   By: ncortigi <ncortigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 11:08:22 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/02/06 12:37:32 by ncortigi         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:45:56 by ncortigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	set_to_draw(float x, float y, t_fdf *data)
 	data->y1 = y;
 	data->z1 = data->z_matrix[(int)data->y1][(int)data->x1];
 	data->z2 = data->z_matrix[(int)data->y2][(int)data->x2];
-	//choose_color(data);
+	choose_color(x, y, data);
 	zoom(data);
 	data->z1 *= data->z_scale;
 	data->z2 *= data->z_scale;

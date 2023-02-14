@@ -6,7 +6,7 @@
 /*   By: ncortigi <ncortigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 11:05:36 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/01/19 14:04:26 by ncortigi         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:33:30 by ncortigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,25 @@ void	keys(int key, t_fdf *data)
 {
 	if (key == F_UP)
 		data->shift_y -= 10;
-	if (key == F_DW)
+	else if (key == F_DW)
 		data->shift_y += 10;
-	if (key == F_SX)
+	else if (key == F_SX)
 		data->shift_x -= 10;
-	if (key == F_DX)
+	else if (key == F_DX)
 		data->shift_x += 10;
-	if (key == ZOOM_MINUS)
+	else if (key == ZOOM_MINUS && data->zoom > 0)
 		data->zoom -= 1;
-	if (key == ZOOM_PLUS)
+	else if (key == ZOOM_PLUS)
 		data->zoom += 1;
-	if (key == Z_SCALE_UP)
+	else if (key == Z_SCALE_UP)
 		data->z_scale += 1;
-	if (key == Z_SCALE_DW)
+	else if (key == Z_SCALE_DW)
 		data->z_scale -= 1;
-	if (key == ANGLE_MINUS)
+	else if (key == ANGLE_MINUS)
 		data->angle -= 0.05;
-	if (key == ANGLE_PLUS)
+	else if (key == ANGLE_PLUS)
 		data->angle += 0.05;
-	if (key == DIM_TYPE)
+	else if (key == DIM_TYPE)
 		data->dim = dimention(data);
 }
 
@@ -60,7 +60,6 @@ int	deal_keys(int key, t_fdf *data)
 {
 	if (check_keys(key))
 	{
-		mlx_clear_window(data->mlx_ptr, data->win_ptr);
 		mlx_destroy_image(data->mlx_ptr, data->img->mlx_img);
 		keys(key, data);
 		image(data);
