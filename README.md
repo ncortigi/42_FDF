@@ -25,6 +25,8 @@ FDF è un progetto che consiste nella visualizzazione in wireframe di una mappa 
 
 ## Utilizzo 🚦
 
+È necessario creare una cartella "minilibx-linux" nella root della repository con all'interno scaricata la minilibx.
+
 Esegui il programma passando il file della mappa:
 ```bash
 ./fdf maps/42.fdf
